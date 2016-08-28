@@ -12,6 +12,7 @@
 #include <time.h>
 //#include<calendar.h>
 #include  <gdk/gdkkeysyms.h>
+#include "calendar.h"
 #include "chatWindow.h"
 /*定义日历结构体*/
 #define DEF_PAD 10
