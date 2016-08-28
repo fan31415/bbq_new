@@ -87,6 +87,7 @@ void creat_main(int argc,char *argv[])
 	gtk_box_pack_start (GTK_BOX (vbox_main), entry_ip, FALSE, FALSE, 0);
 	//用户、群组、最近联系人
 	//vbox_mid = get_vbox_mid();
+	//vbox_Main, vbox mid has been defined in the header files
 	get_vbox_mid();
 	gtk_box_pack_start(GTK_BOX (vbox_main),vbox_mid, FALSE, TRUE, 0);
 	//底层按钮

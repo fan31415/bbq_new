@@ -12,6 +12,7 @@ void setMenu() {
 void destroy_all(){
 	//gtk_widget_destroy();
 	gtk_main_quit();
+	//为了退出整个程序而添加，还需观察
 	exit(0);
 }
 void creat_main(int argc,char *argv[])

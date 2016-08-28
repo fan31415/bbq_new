@@ -6,39 +6,8 @@
 /*返回值：void
 /*作者：刘景明——team5
 /***************************************************/
-#include <stdlib.h>
-#include <string.h>
-#include <gtk/gtk.h>
-#include <time.h>
-//#include<calendar.h>
-#include  <gdk/gdkkeysyms.h>
 #include "calendar.h"
-#include "chatWindow.h"
-/*定义日历结构体*/
-#define DEF_PAD 10
-#define DEF_PAD_SMALL 5
-#define TM_YEAR_BASE 1900
-
-typedef struct _CalendarData {
-  GtkWidget *flag_checkboxes[5];
-  gboolean  settings[5];
-  gchar     *font;
-  GtkWidget *font_dialog;
-  GtkWidget *window;
-  GtkWidget *prev2_sig;
-  GtkWidget *prev_sig;
-  GtkWidget *last_sig;
-  GtkWidget *month;
-} CalendarData;
-
-/*定义日历显示枚举类型，用于复选框操作*/
-enum {
-  calendar_show_header,
-  calendar_show_days,
-  calendar_month_change, 
-  calendar_show_week,
-  calendar_monday_first
-};
+
 
 /*GtkCalendar 日历构件
 */
@@ -220,7 +189,8 @@ void create_calendar()
 
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
-    gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_MOUSE);
+   // gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_MOUSE);
+	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
 
     g_signal_connect (G_OBJECT (window), "destroy",
 	              G_CALLBACK (gtk_widget_destroyed),

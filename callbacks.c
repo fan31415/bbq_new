@@ -157,10 +157,10 @@ void show_about(void)
 	const gchar const *rc_documenters[] = {"team6",NULL,NULL};
 	const gchar const *rc_artists[] = {"team6",NULL,NULL};
 	GtkWidget *dialog = gtk_about_dialog_new();
-	gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dialog), "Linpop");
-	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(dialog), "Linpop");
+	gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dialog), "BBQ");
+	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(dialog), "BBQ");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(dialog),"V-1.0"); 
-	gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(dialog),"copyright@非常6+1");
+	gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(dialog),"copyright@team6");
 	gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(dialog),"BBQ是自由软件；\n您可以重新发布它;\nBBQ是一款著名的局域网聊天软件，\n提供基于Internet标准的信息收发功能; \nBBQ V-1.0正式版致力于为您提供更为便捷舒适的使用体验;\n本软件完全免费，欢迎您使用\n特别感谢何岩， 王学宾，王雨楠，刘景明前辈的贡献！");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(dialog),(const gchar **)rc_authors);
 	gtk_about_dialog_set_artists(GTK_ABOUT_DIALOG(dialog),(const gchar **)rc_documenters);

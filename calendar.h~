@@ -32,5 +32,4 @@ enum {
   calendar_monday_first
 };
 void calendar(GtkWidget *button, gpointer data);
-void create_calendar();
 #endif
