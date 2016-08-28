@@ -1,0 +1,3 @@
+linpop.o linpop.o: linpop.c linpop.h
+
+linpop.h:
