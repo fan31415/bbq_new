@@ -43,7 +43,7 @@ void sendToTextView1(GtkWidget *button, textView *textViewAll)
 	char *text;
         char *ip;
 	char *name;
-	strcpy(text,"\0");
+	//strcpy(text,"\0");
 	ip = textViewAll->ip;
 	gtk_text_buffer_get_bounds(GTK_TEXT_BUFFER(textViewAll->buffer2),&start,&end);
 	text=gtk_text_buffer_get_text(GTK_TEXT_BUFFER(textViewAll->buffer2),&start,&end,FALSE);

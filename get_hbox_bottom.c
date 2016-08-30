@@ -46,6 +46,7 @@ GtkWidget* get_hbox_bottom(){
 	gtk_button_set_image(time, timeImage);
 	g_signal_connect(G_OBJECT(time), "clicked", G_CALLBACK(create_calendar), NULL);	
 	gtk_box_pack_start(GTK_BOX (hbox_bottom),time,FALSE,TRUE,padding);
+	gtk_widget_set_tooltip_text(time,"日历");
 //更换皮肤
 /*
 	swap_style = pic_button("Icon/style.svg");

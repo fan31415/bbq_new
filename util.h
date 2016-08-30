@@ -10,4 +10,5 @@
 #define __UTIL_H
 void die(char * message);
 void copyData(int from, int to);
+void int2str(int a, char * str);
 #endif

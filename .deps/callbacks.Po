@@ -400,11 +400,12 @@ callbacks.o callbacks.o: callbacks.c callbacks.h \
   /usr/include/malloc.h /usr/include/string.h /usr/include/bits/string.h \
   /usr/include/bits/string2.h /usr/include/endian.h \
   /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
-  /usr/include/stdlib.h chatWindow.h /usr/include/sys/types.h \
-  /usr/include/sys/select.h /usr/include/bits/select.h \
-  /usr/include/sys/sysmacros.h /usr/include/alloca.h \
-  /usr/include/gtk-2.0/gdk/gdkkeysyms.h chatRecord.h mytime.h \
-  creat_main.h get_hbox_top.h get_hbox_bottom.h msg_list.h
+  /usr/include/stdlib.h utf16_to_utf8.h /usr/include/iconv.h chatWindow.h \
+  /usr/include/sys/types.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/sys/sysmacros.h \
+  /usr/include/alloca.h /usr/include/gtk-2.0/gdk/gdkkeysyms.h \
+  chatRecord.h mytime.h creat_main.h get_hbox_top.h get_hbox_bottom.h \
+  msg_list.h
 
 callbacks.h:
 
@@ -1335,6 +1336,10 @@ userinfo.h:
 /usr/include/bits/byteswap.h:
 
 /usr/include/stdlib.h:
+
+utf16_to_utf8.h:
+
+/usr/include/iconv.h:
 
 chatWindow.h:
 

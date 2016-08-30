@@ -10,7 +10,7 @@
 #include "set_soft.h"
 #include "calendar.h"
 #include "getMenu_style.h"
-#define padding 0
+#define padding 3
 
 GtkWidget* get_hbox_bottom(){
 	GtkWidget *hbox_bottom;

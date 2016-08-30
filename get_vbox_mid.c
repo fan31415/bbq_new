@@ -8,6 +8,9 @@
 #include "get_vbox_mid.h"
 #include "getMenu_right.h"
 #include "creat_main.h"
+void pri(GtkWidget *widget, gpointer entry) {
+	g_print("test click\n");
+}
 GtkWidget *get_vbox_mid(){
 	GtkWidget *hbox_mid;
   	GtkWidget *talk;
@@ -17,6 +20,7 @@ GtkWidget *get_vbox_mid(){
   	GtkTreeSelection *selection; 
 	GtkWidget *menu_right;
 //数据测试
+/*
 	struct userinfo *p;
 	p=createOneUser("何岩","东北大学","127.0.0.1","I am fine!",1);				
 	head=addUser(head,p);
@@ -33,7 +37,7 @@ GtkWidget *get_vbox_mid(){
 	p=createOneUser("王学宾","东北大学","127.0.0.7","I am fine!",1);	
 	head=addUser(head,p);
 	displayAll(head);
-	printf("静态数据测试初始化完成！\n\n");
+	printf("静态数据测试初始化完成！\n\n");*/
 //Tree
 	  vbox_mid = gtk_vbox_new(FALSE, 0);
 	  gtk_widget_set_size_request (GTK_WIDGET (vbox_mid), 220,470);
@@ -48,17 +52,19 @@ GtkWidget *get_vbox_mid(){
 
 	  entry = gtk_entry_new();
 	  g_signal_connect(selection, "changed", G_CALLBACK(on_changed), entry);
+	 // g_signal_connect(selection, "changed", G_CALLBACK(talk_item), entry);
 //右键菜单
 	menu_right = getMenu_right();
 	ga_add_popup_menu (view,GTK_MENU(menu_right));
 	return NULL;
 }
 
+
 /**************************************************************/
 //鼠标选择变化
 /**************************************************************/
 void  on_changed(GtkWidget *widget, gpointer entry) 
-{
+{ g_print("on change");
   GtkTreeIter iter;
   GtkTreeModel *model;
   char *value;
@@ -68,6 +74,7 @@ void  on_changed(GtkWidget *widget, gpointer entry)
     	gtk_tree_model_get(model, &iter,COLUMN, &value,  -1);
     	gtk_entry_set_text(GTK_ENTRY(entry), value);
     	g_free(value);
+	//talk_item(widget,entry);
   	}
 }
 

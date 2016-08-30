@@ -7,6 +7,7 @@
 /********************************************/
 #include "creat_main.h"
 #include <stdlib.h>
+#include <locale.h>
 void setMenu() {
 }
 void destroy_all(){
@@ -26,6 +27,8 @@ void creat_main(int argc,char *argv[])
 
 	//初始化部分
 	gtk_init (&argc, &argv);
+	//see if works
+	setlocale(LC_ALL, "zh_CN.UTF-16");
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	gtk_widget_set_size_request (GTK_WIDGET (window), 220, 600);
 	gtk_window_move(GTK_WINDOW (window),1200,0);

@@ -1,9 +1,13 @@
 #include "msgsend.h"
 #include "linpop.h"
 #include "string.h"
-
+#include "global.h"
 #include <pthread.h>
-
+extern int my_img_code;
+extern int my_avatar_code;
+extern char * user_name;
+extern char * user_group;
+extern char * sigh;
 //LINPOP的报文格式:版本号:包编号:发送者姓名:发送者组名:命令字:附加信息
 int msg_send(const int mode,const char *msg,struct sockaddr_in *p,int fd)
 {
@@ -12,8 +16,8 @@ int msg_send(const int mode,const char *msg,struct sockaddr_in *p,int fd)
 	int udp_fd=fd;
 	int broadcast_en=1;
 	char msg_buf[SND_BUF_LEN];
-	char *use="linpop"; //发送者姓名 (可由全局变量指明)
-	char *group="linpop"; //发送者组名(可由全局变量指明)
+	char *use= user_name; //发送者姓名 (可由全局变量指明)
+	char *group= user_group; //发送者组名(可由全局变量指明)
 	socklen_t broadcast_len=sizeof(broadcast_en);
 	long int msg_id=time((time_t *)NULL);// 填充包编号
 //printf("1\n");	
@@ -52,13 +56,13 @@ int msg_send(const int mode,const char *msg,struct sockaddr_in *p,int fd)
 		die("setsockopt error");
 printf("mode %x\n",mode);
 	switch (mode)
-	{
+	{	
 		case LINPOP_NOOPERATION://空操作
 			sprintf(msg_buf,"1:%d:%s:%s:%d:%s",msg_id,use,group,mode,NULL);
 			sendto(udp_fd,msg_buf,strlen(msg_buf),0,(struct  sockaddr*)&udp_addr,sizeof(struct sockaddr));
 			break;
 		case LINPOP_BR_ENTRY:	//用户上线发送的消息
-			sprintf(msg_buf,"1:%d:%s:%s:%d:%s0",msg_id,use,group,mode,msg);
+			sprintf(msg_buf,"1:%d:%s:%s:%d:%s",msg_id,use,group,mode,msg);
 //printf("----- ! \n");
 //			printf("message len = [ %d ]",sizeof(msg_buf));
 //printf("------ ! \n");
@@ -71,7 +75,7 @@ printf("mode %x\n",mode);
 			break;
 
 		case LINPOP_BR_EXIT:	//退出时发送的消息
-			sprintf(msg_buf,"1:%d:%s:%s:%d:%s0",msg_id,use,group,mode,msg);
+			sprintf(msg_buf,"1:%d:%s:%s:%d:%s",msg_id,use,group,mode,msg);
 			sendto(udp_fd,msg_buf,strlen(msg_buf),0,(struct   sockaddr*)&udp_addr,sizeof(struct sockaddr));
 			break;
 		case LINPOP_ANSENTRY:	//确认在线，即应答在线

@@ -35,6 +35,7 @@
 #define LINPOP_GETFILEDATA 	0x00000060UL	//同意传输文件
 #define LINPOP_SENDFILEREQUEST 	0x00000061UL	//请求发送文件
 #define LINPOP_RELEASEFILES 	0x00000062UL	//停止接收文件
+#define LINPOP_CHANGE_IMAGE 	0x00000063UL	//更改用户形象
 
 /*  option for all command  */
 #define LINPOP_ABSENCEOPT		0x00000100UL	//缺席模式(Member recognition command)

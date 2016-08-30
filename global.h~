@@ -1,0 +1,8 @@
+#ifndef GLOBAL_H
+#define GLOBAL_H
+int  my_img_code = 1;
+int my_avatar_code = 1;
+char * user_name = "fan";
+char * user_group = "my friend";
+char * sigh = "hello this is my sigh";
+#endif

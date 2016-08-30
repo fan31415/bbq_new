@@ -9,7 +9,7 @@
 #define __LINPOP_H
 
 #define LINPOP_VERSION                 0x001
-#define LINPOP_PORT                    0x981	//port 2425
+#define LINPOP_PORT                    0x979	//port 2425
 //#define LINPOP_BR_IP		255.255.255.255
 
 

@@ -11,10 +11,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
+#include "global.h"
 #include "util.h"
+/*
+extern char  img_code_str[255];
+extern char  avatar_code_str[255];*/
 
-
+extern int my_img_code;
+extern int my_avatar_code;
 
 /**************************************************/
 /*名称：die
@@ -43,6 +47,10 @@ void die(char * message)
 /*返回值：void
 /*作者：王龙——team5
 /***************************************************/
+void int2str(int a, char * str) {
+	//memset(str, 0, 255);
+	sprintf(str, "%d", a);
+}
 void copyData(int from, int to)
 {
 	char buf[1024];

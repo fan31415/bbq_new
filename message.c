@@ -240,7 +240,7 @@ err_out:
 }
 
 int parse_u_info(u_info_t *u_info,const char *u_info_buff,size_t len)
-{
+{	printf("user info buf %s\n", u_info_buff);
  	long int_val;
  	char *sp=NULL;
  	char *ep=NULL;
@@ -336,8 +336,80 @@ printf("8\n");
   /*
    *签名
    */
+  if(memchr(sp, '_', remains) != NULL) {
+
+  ep=memchr(sp, '_', remains);
+  if (!ep) {
+printf("8\n");
+    rc=-EINVAL;
+    goto err_out;
+  }
+  *ep='\0';
+  remains =len - ((unsigned long)ep-(unsigned long)buffer);
+  if (remains<=0) {
+printf("9\n");
+    rc=-EINVAL;
+    goto err_out;
+  }
+  ++ep;
+  int_val=strtol(sp, (char **)NULL, 10);
+
   u_info->u_qianming=strdup(sp);
   printf("Qianming: %s\n",u_info->u_qianming);
+
+ sp=ep;
+
+ /*
+ *image
+ */
+
+
+ ep=memchr(sp, '_', remains);
+  if (!ep) {
+printf("10\n");
+    rc=-EINVAL;
+    goto err_out;
+  }
+  *ep='\0';
+  remains =len - ((unsigned long)ep-(unsigned long)buffer);
+  if (remains<=0) {
+printf("11\n");
+    rc=-EINVAL;
+    goto err_out;
+  }
+  ++ep;
+  int_val=strtol(sp, (char **)NULL, 10);
+
+  u_info->u_img_code=int_val;
+  printf("img code: %d\n",u_info->u_img_code);
+  sp=ep;
+ /*
+ *avatar
+ */
+
+ep=memchr(sp, '_', remains);
+  if (!ep) {
+printf("11\n");
+    rc=-EINVAL;
+    goto err_out;
+  }
+  *ep='\0';
+  remains =len - ((unsigned long)ep-(unsigned long)buffer);
+  if (remains<=0) {
+printf("err12\n");
+    rc=-EINVAL;
+    goto err_out;
+  }
+  ++ep;
+  int_val=strtol(sp, (char **)NULL, 10);
+
+  u_info->u_avatar_code=int_val;
+  printf("avatar code: %d\n",u_info->u_avatar_code);
+  sp=ep;
+} else {
+	u_info->u_qianming = strdup(sp);
+	printf("Qianming: %s\n",u_info->u_qianming);
+}
 
 err_out:
   free(buffer);

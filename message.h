@@ -16,9 +16,11 @@ typedef struct _msg_data{
   int pkt_seq_no;	//包的序列号
   int command;
   int command_opts;
+  int image_code;	//形象代码
   char *username;	//用户名
   char *hostname;	//主机名称
   char *extstring;	//群组名称
+
   struct timeval tv;
   char *message;
 }msg_data_t;
@@ -28,6 +30,8 @@ typedef struct _user_info{
 	char * u_group;
 	int u_pic_id;
 	char * u_qianming;
+	int u_img_code; //形象代码
+	int u_avatar_code;
 }u_info_t;
 
 const char *refer_user_name_from_msg(const msg_data_t *msg);

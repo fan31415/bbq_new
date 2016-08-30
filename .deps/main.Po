@@ -414,10 +414,10 @@ main.o main.o: main.c /usr/include/stdio.h /usr/include/features.h \
   /usr/include/bits/sockaddr.h /usr/include/asm/socket.h \
   /usr/include/asm/sockios.h /usr/include/bits/in.h /usr/include/netdb.h \
   /usr/include/rpc/netdb.h /usr/include/bits/netdb.h filetansfer.h udp.h \
-  main.h userinfo.h /usr/include/malloc.h chatWindow.h \
-  /usr/include/gtk-2.0/gdk/gdkkeysyms.h chatRecord.h mytime.h \
-  creat_main.h callbacks.h get_hbox_top.h get_vbox_mid.h \
-  get_hbox_bottom.h msg_list.h
+  main.h userinfo.h /usr/include/malloc.h utf16_to_utf8.h \
+  /usr/include/iconv.h chatWindow.h /usr/include/gtk-2.0/gdk/gdkkeysyms.h \
+  chatRecord.h mytime.h creat_main.h callbacks.h get_hbox_top.h \
+  get_vbox_mid.h get_hbox_bottom.h msg_list.h
 
 /usr/include/stdio.h:
 
@@ -1412,6 +1412,10 @@ main.h:
 userinfo.h:
 
 /usr/include/malloc.h:
+
+utf16_to_utf8.h:
+
+/usr/include/iconv.h:
 
 chatWindow.h:
 

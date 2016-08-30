@@ -20,7 +20,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <gtk/gtk.h>
-
+#include "utf16_to_utf8.h"
 #include "chatWindow.h"
 #include "chatRecord.h"
 
@@ -43,6 +43,8 @@ struct userinfo
     char  ip[SIZE_1];
     char  signature[SIZE_2];
     int picture;
+    int image_code;//用户形象代码
+    int avatar_code;//avatar code
     textView *textViewAll; //add by wanglong 2010-07-08
     struct chatRecord * record;
     struct userinfo * next;

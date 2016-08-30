@@ -412,11 +412,12 @@ msgrecv.o msgrecv.o: msgrecv.c /usr/include/stdlib.h \
   /usr/include/gtk-2.0/gtk/gtkoldeditable.h \
   /usr/include/gtk-2.0/gtk/gtkoptionmenu.h \
   /usr/include/gtk-2.0/gtk/gtkpreview.h \
-  /usr/include/gtk-2.0/gtk/gtktipsquery.h msgrecv.h message.h linpop.h \
-  userinfo.h /usr/include/malloc.h /usr/include/string.h \
-  /usr/include/bits/string.h /usr/include/bits/string2.h chatWindow.h \
-  /usr/include/gtk-2.0/gdk/gdkkeysyms.h chatRecord.h mytime.h callbacks.h \
-  creat_main.h get_hbox_top.h get_vbox_mid.h get_hbox_bottom.h msg_list.h
+  /usr/include/gtk-2.0/gtk/gtktipsquery.h global.h msgrecv.h message.h \
+  linpop.h userinfo.h /usr/include/malloc.h /usr/include/string.h \
+  /usr/include/bits/string.h /usr/include/bits/string2.h utf16_to_utf8.h \
+  /usr/include/iconv.h chatWindow.h /usr/include/gtk-2.0/gdk/gdkkeysyms.h \
+  chatRecord.h mytime.h callbacks.h creat_main.h get_hbox_top.h \
+  get_vbox_mid.h get_hbox_bottom.h util.h msg_list.h
 
 /usr/include/stdlib.h:
 
@@ -1382,6 +1383,8 @@ msgrecv.o msgrecv.o: msgrecv.c /usr/include/stdlib.h \
 
 /usr/include/gtk-2.0/gtk/gtktipsquery.h:
 
+global.h:
+
 msgrecv.h:
 
 message.h:
@@ -1397,6 +1400,10 @@ userinfo.h:
 /usr/include/bits/string.h:
 
 /usr/include/bits/string2.h:
+
+utf16_to_utf8.h:
+
+/usr/include/iconv.h:
 
 chatWindow.h:
 
@@ -1415,5 +1422,7 @@ get_hbox_top.h:
 get_vbox_mid.h:
 
 get_hbox_bottom.h:
+
+util.h:
 
 msg_list.h:

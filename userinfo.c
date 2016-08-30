@@ -1,4 +1,5 @@
 #include "userinfo.h"
+#include "stdio.h"
 
 extern struct userinfo *head ; //add by wanglong 2010-07-08 
 
@@ -166,17 +167,59 @@ struct userinfo * createOneUser(char * name, char * group,char * ip,char * signa
 {
 	struct userinfo * p;
 	p=(struct userinfo * )malloc(LEN);
+/*
+	har outbufs[255] = {0};
+	u16_to_u8(group, outbufs);
+	printf("start group %s \n", outbufs);
+	printf("group name %s\n", group);
+int i;
+for(i = 0; group[i] != '\0'; i++) {
+	printf("user group %x\n", group[i]);
+}
+
+for(i = 0; name[i] != '\0'; i++) {
+	printf("user name %x\n", name[i]);
+}
+*/
+	//dealCharacter(group);
 	strcpy(p->name,name);
+	//delete group first
+	//strcpy(p->group,"我的好友");
 	strcpy(p->group,group);
+	//strcpy(a,group);
 	strcpy(p->ip,ip);
 	strcpy(p->signature,signature);
 	p->picture=picture;
+	//p->image_code = image_code;
 	p->textViewAll = NULL;//add by wanglong 2010-07-08 
 	p->record = NULL; //add record 2010-07-12
 	p->next=NULL;
 	return p;
 }
 
+char * createMyUser() {
+	
+}
+	
+//utf16
+void dealCharacter(char * group) {
+	int i;
+	for(i = 0; group[i] != '\0'; i+=2) {
+		/*char s1[10] = {0};
+		sprintf(s1, "%x", group[i]);
+		char s2[10] = {0};
+		sprintf(s2, "%x", group[i+1]);
+		char s3[10] = {0};
+		for(int j = 6; j < 8; j++) {
+			s3[j-6] = s1[j];
+		}
+		for(int j = 6; j < 8; j++) {
+			s3[j-4] = s2[j];
+		}
+		printf("user group %x\n", group[i]);*/
+		printf("%c%c", group[i], group[i+1]);
+	}
+}
 
 /*****************************************************************/
 /*
