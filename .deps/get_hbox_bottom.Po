@@ -406,7 +406,8 @@ get_hbox_bottom.o get_hbox_bottom.o: get_hbox_bottom.c mytime.h \
   /usr/include/stdlib.h calendar.h /usr/include/sys/types.h \
   /usr/include/sys/select.h /usr/include/bits/select.h \
   /usr/include/sys/sysmacros.h /usr/include/alloca.h \
-  /usr/include/gtk-2.0/gdk/gdkkeysyms.h chatWindow.h getMenu_style.h
+  /usr/include/gtk-2.0/gdk/gdkkeysyms.h chatWindow.h getMenu_style.h \
+  tips.h
 
 mytime.h:
 
@@ -1355,3 +1356,5 @@ calendar.h:
 chatWindow.h:
 
 getMenu_style.h:
+
+tips.h:

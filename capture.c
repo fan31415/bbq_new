@@ -5,7 +5,13 @@
 #include <string.h>
 #include <gdk/gdkx.h>
 #include "chatWindow.h"
-
+/**************************************************/
+/*名称：capture.c
+/*描述：“截屏”按钮的回调函数，实现了截屏功能
+/*作成日期： 2016.8.31
+/*参数：
+/*作者： 于馨喆
+/***************************************************/
 void do_capture_screenshot (char *file, int sec)
 {
 	 gint x, y;

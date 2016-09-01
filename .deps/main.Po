@@ -417,7 +417,7 @@ main.o main.o: main.c /usr/include/stdio.h /usr/include/features.h \
   main.h userinfo.h /usr/include/malloc.h utf16_to_utf8.h \
   /usr/include/iconv.h chatWindow.h /usr/include/gtk-2.0/gdk/gdkkeysyms.h \
   chatRecord.h mytime.h creat_main.h callbacks.h get_hbox_top.h \
-  get_vbox_mid.h get_hbox_bottom.h msg_list.h
+  get_vbox_mid.h get_hbox_bottom.h msg_list.h global.h
 
 /usr/include/stdio.h:
 
@@ -1436,3 +1436,5 @@ get_vbox_mid.h:
 get_hbox_bottom.h:
 
 msg_list.h:
+
+global.h:

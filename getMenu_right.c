@@ -2,12 +2,18 @@
 /*名称：getMenu_right.c
 /*描述： 1、该文件定义了程序中用于创建右键菜单的函数
 	2、定义了相应的回调函数
-/*作者：何岩——team5
-/*日期：2010－07-01
+/*作者：陈楚依
+/*日期：2016－8－31
 /********************************************/
 #include "getMenu_right.h"
 #include "chatWindow.h"
-
+#include "global.h"
+#include "parse_image_path.h"
+extern int my_img_code;
+extern int my_avatar_code;
+extern char  user_name[100];
+extern char  user_group[100];
+extern char  sigh[100];
 /*******************************************************/
 //生成右键菜单
 /*******************************************************/
@@ -100,8 +106,9 @@ void look_item(GtkWidget *widget, gpointer entry)
 			printf("group:%s\n",p->group);
 			printf("IP:%s\n",p->ip);
 			printf("signature:%s\n",p->signature);
-			printf("picture:%d\n",p->picture);
-			get_usr_info(p->name,p->group,p->ip,p->signature);
+			printf("avatar code:%d\n",p->avatar_code);
+			printf("image code:%d\n",p->image_code);
+			get_usr_info(p->name,p->group,p->ip,p->signature, p->image_code, p->avatar_code);
 		}
 		p = p->next;
 		strcpy(node,l);
@@ -116,8 +123,8 @@ void talk_item(GtkWidget *widget,gpointer entry)
 	extern struct userinfo *head;
 	struct userinfo *p = head;
   	const char *str = gtk_entry_get_text(entry); 
-	char node[50];
-	char l[50];
+	char node[50] = {0};
+	char l[50] = {0};
 	while(p!=NULL){
 		strcpy(node,p->name);
 		strcat(node,"(");
@@ -129,13 +136,14 @@ void talk_item(GtkWidget *widget,gpointer entry)
 			printf("group:%s\n",p->group);
 			printf("IP:%s\n",p->ip);
 			printf("signature:%s\n",p->signature);
-			printf("picture:%d\n",p->picture);
-//add chat window call 2010-07-12
+			printf("avatar code:%d\n",p->avatar_code);
+			printf("image code:%d\n",p->image_code);
 			if(p->textViewAll == NULL)
-				createChatWindow(p->ip,p->name,NULL);
+				createChatWindow(p->ip,p->name,NULL,p->signature,p->image_code, p->avatar_code);
 		}
 		p = p->next;
-		strcpy(node,l);
+		strcpy(node, l);
+		//memset(node, 0 , sizeof(node));
 	}
 }
 /**************************************************************/
@@ -146,24 +154,34 @@ void grouptalk(GtkWidget *widget, gpointer entry)
 	extern struct userinfo *head;
 	struct userinfo *p = head;
   	const char *str = gtk_entry_get_text(entry); 
+	char node[50];
+	char l[50];
 	while(p!=NULL){
+        	strcpy(node,p->name);
+		//strcat(node,"pg_chat(");
+		strcat(node,"(");
+		strcat(node,p->ip);
+		strcat(node,")");
 		printf("************群组聊天***********\n\n");
-		if(0 == strcmp(str,p->group)){
+		//if(0 == strcmp(str,p->node)){
+		if(0 == strcmp(str,node)){
 			printf("-----------------------\n");
 			printf("name:%s\n",p->name);
 			printf("group:%s\n",p->group);
 			printf("IP:%s\n",p->ip);
 			printf("signature:%s\n",p->signature);
 			printf("picture:%d\n",p->picture);
-			printf("-----------------------\n\n");
+			if(p->textViewAll == NULL)
+				pg_ChatWindow(p->ip,p->name,NULL);
 		}
 		p = p->next;
+		strcpy(node,l);
 	}
 }
 /**************************************************************/
 //查看资料界面
 /**************************************************************/
-void get_usr_info(char *name,char *group,char *ip,char *sig)
+void get_usr_info(char *name,char *group,char *ip,char *sig, int img_code, int avatar_code)
 {
 	GtkWidget *usr_info;
 	GtkWidget *table;
@@ -179,8 +197,11 @@ void get_usr_info(char *name,char *group,char *ip,char *sig)
 	gtk_window_set_skip_taskbar_hint(GTK_WINDOW (usr_info),TRUE);
 	gtk_window_set_resizable(GTK_WINDOW (usr_info),FALSE);
 	gtk_window_set_title (GTK_WINDOW (usr_info), "查看资料");
-
-	pic = gtk_image_new_from_file ("Icon/1.gif");	
+	
+	char avatar_path[255] = {0};
+	parse_avatar_path(avatar_code, avatar_path);
+	printf("avatar path %s\n", avatar_path);
+	pic = gtk_image_new_from_file (avatar_path);	
 	
 	table = gtk_table_new(8,7,TRUE);
 	gtk_container_add (GTK_CONTAINER (usr_info), table);

@@ -1,8 +1,8 @@
 /********************************************/
 /*名称：message.c
 /*描述：此文件定义了对消息解析功能的函数
-/*作者：王龙——team5
-/*日期：2010－06-26
+/*作者：任晓宇——team6
+/*日期：2016－08-29
 /********************************************/
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,76 +12,19 @@
 #include <iconv.h>
 
 #include "message.h"
-/*
-const char * refer_user_name_from_msg(const msg_data_t *msg){
-  if (!msg)
-    return "unknow";
-  return (msg->username)?(msg->username):("unknow");
-}
-const char * refer_host_name_from_msg(const msg_data_t *msg){
-  if (!msg)
-    return "unknow";
-  return (msg->hostname)?(msg->hostname):("unknow");
-}
-const char * refer_nick_name_from_msg(const msg_data_t *msg){
-  if (!msg)
-    return "unknow";
-  return (msg->message)?(msg->message):("unknow");
-}
-const char * refer_group_name_from_msg(const msg_data_t *msg){
-  if (!msg)
-    return "unknow";
-  return (msg->extstring)?(msg->extstring):("unknow");
-}
-int refer_pkt_no_name_from_msg(const msg_data_t *msg){
-  return msg->pkt_seq_no;
-}
 
-
-
-int init_message_data(msg_data_t *msg){
-  if (!msg)
-    return -EINVAL;
-
-  memset(msg,0,sizeof(msg_data_t));
-  msg->magic=LINPOP_MSG_MAGIC;
-
-  return 0;
-}
-int release_message_data(msg_data_t *msg){
-
-  if ( (!msg) || (msg->magic!= LINPOP_MSG_MAGIC) )
-    return -EINVAL;
-  
-  if (msg->username)
-    free(msg->username);
-
-  if (msg->hostname)
-    free(msg->hostname);
-
-  if (msg->extstring)
-    free(msg->extstring);
-
-  if (msg->message)
-    free(msg->message);
-
-  msg->magic=0;
-
-  return 0;
-}
-*/
 
 
 /**************************************************/
 /*名称：parse_message
 /*描述：实现解析网络数据包功能
-/*作成日期： 2010-06-27
+/*作成日期： 2016－08-29
 /*参数：
 /*    	参数1：msg、 msg_data_t、输出参数、解析后填充此数据结构
 /*	参数1：message_buff、 const char *、输入参数、需要解析的网络数据包
 /*	参数1：len、 size_t、输入参数、需要解析数据的长度
 /*返回值：void
-/*作者：王龙——team5
+/*作者：任晓宇——team6
 /***************************************************/
 int parse_message(msg_data_t *msg,const char *message_buff,size_t len)
 {
@@ -216,11 +159,34 @@ printf("11\n");
   /*
    *信息
    */
+if(ep=memchr(sp, ':', remains) != NULL) {
+
+ ep=memchr(sp, ':', remains);
+  if (!ep) {
+printf("9\n");
+    rc=-EINVAL;
+    goto err_out;
+  }
+  *ep='\0';
+  remains =len - ((unsigned long)ep-(unsigned long)buffer);
+  if (remains<=0) {
+printf("10\n");
+    rc=-EINVAL;
+    goto err_out;
+  }
+  ++ep;
   msg->message=strdup(sp);
   printf("message:%s\n",msg->message);
+  sp=ep;
+  
+  } else {
+	 msg->message=strdup(sp);
+  printf("message:%s\n",msg->message);
+}
   /*
    *扩展信息
    */
+/*
   ep=memchr(sp, '\0', remains);
   if (!ep) {
 printf("12\n");
@@ -233,7 +199,7 @@ printf("12\n");
     sp=ep;
     msg->extstring=strdup(sp);
    printf("extention:%s\n",msg->extstring);
-  }
+  }*/
 err_out:
   free(buffer);
   return rc;

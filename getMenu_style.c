@@ -2,8 +2,8 @@
 /*名称：get_vbox_mid.c
 /*描述：1.该文件定义了用于创建皮肤选择菜单的函数
 /*     2.定义了皮肤选择菜单的回调函数。
-/*作者：何岩——team5
-/*日期：2010－07-01
+/*作者：蔡新军
+/*日期：2016－08-29
 /********************************************/
 #include "getMenu_style.h"
 /****************************************/
@@ -19,6 +19,7 @@ char* getstyle(char* p)
 			break;
 	return b[i];
 }
+
 void show_warning(GtkWidget *window)
 {
   GtkWidget *dialog;
@@ -26,7 +27,7 @@ void show_warning(GtkWidget *window)
             GTK_DIALOG_DESTROY_WITH_PARENT,
             GTK_MESSAGE_WARNING,
             GTK_BUTTONS_OK,
-            "您还不是linpop会员，注册linpop会员即可\n享受更换皮肤及五十余项会员特权！");
+            "敬请期待");
   gtk_window_set_title(GTK_WINDOW(dialog), "Warning");
   gtk_dialog_run(GTK_DIALOG(dialog));
   gtk_widget_destroy(dialog);
@@ -50,7 +51,7 @@ void style_response(gchar *string)
 {
 //	extern char * filename;
 	printf ("%s\n",string);
-	
+
 //	filename = getstyle(string);
 //	printf ("%s\n",filename);
 }

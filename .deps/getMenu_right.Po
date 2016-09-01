@@ -404,7 +404,7 @@ getMenu_right.o getMenu_right.o: getMenu_right.c getMenu_right.h \
   /usr/include/sys/types.h /usr/include/sys/select.h \
   /usr/include/bits/select.h /usr/include/sys/sysmacros.h \
   /usr/include/alloca.h /usr/include/gtk-2.0/gdk/gdkkeysyms.h \
-  chatRecord.h mytime.h
+  chatRecord.h mytime.h global.h parse_image_path.h util.h
 
 getMenu_right.h:
 
@@ -1355,3 +1355,9 @@ chatWindow.h:
 chatRecord.h:
 
 mytime.h:
+
+global.h:
+
+parse_image_path.h:
+
+util.h:

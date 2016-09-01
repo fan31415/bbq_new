@@ -12,8 +12,8 @@
 		h.显示任务栏菜单-------------trayView
 		i.显示任务栏图标-------------trayIconActivated
 		j.弹出任务栏菜单-------------trayIconPopup
-/*作者：何岩——team5
-/*日期：2010－07-01
+/*作者：常耀耀
+/*日期：2016－08-25
 /********************************************/
 #include "callbacks.h"
 #include "get_vbox_mid.h"
@@ -74,7 +74,8 @@ GtkWidget *pic_button( gchar *filename)
 //实时刷新界面
 /*********************************************/
 void lin_refresh(void)
-{
+{ 	
+	
   	GtkTreeStore *store;
 	GtkTreeIter toplevel, child;
 	struct userinfo a[50];
@@ -84,6 +85,7 @@ void lin_refresh(void)
 	extern GtkWidget *view;
 	temp = head;
 	int b[50]={0},top=0,num,i,j;
+	printf("before remove all\n");
 	remove_all();
 	store = GTK_TREE_STORE(gtk_tree_view_get_model(
        		GTK_TREE_VIEW(view)));
@@ -140,7 +142,7 @@ void enter_ip( GtkWidget *widget,GtkWidget *entry )
 			printf("signature:%s\n",temp->signature);
 			printf("picture:%d\n",temp->picture);
 			/*根据找到的好友建立聊天窗口*/
-			createChatWindow(temp->ip,temp->name,NULL);
+			createChatWindow(temp->ip,temp->name,NULL, temp->signature,temp->image_code, temp->avatar_code);
 			printf("已经建立连接！\n\n");
 		}
 		temp = temp->next;
@@ -161,7 +163,7 @@ void show_about(void)
 	gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(dialog), "BBQ");
 	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(dialog),"V-1.0"); 
 	gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(dialog),"copyright@team6");
-	gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(dialog),"BBQ是自由软件；\n您可以重新发布它;\nBBQ是一款著名的局域网聊天软件，\n提供基于Internet标准的信息收发功能; \nBBQ V-1.0正式版致力于为您提供更为便捷舒适的使用体验;\n本软件完全免费，欢迎您使用\n特别感谢何岩， 王学宾，王雨楠，刘景明前辈的贡献！");
+	gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(dialog),"BBQ是自由软件；\n您可以重新发布它;\nBBQ是一款非著名的局域网聊天软件，\n提供基于Internet标准的信息收发功能; \nBBQ V-1.0正式版致力于为您提供更为便捷舒适的使用体验;\n本软件完全免费，欢迎您使用\n特别感谢何岩， 王学宾，王雨楠，刘景明前辈的贡献！");
 	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(dialog),(const gchar **)rc_authors);
 	gtk_about_dialog_set_artists(GTK_ABOUT_DIALOG(dialog),(const gchar **)rc_documenters);
 	gtk_about_dialog_set_documenters(GTK_ABOUT_DIALOG(dialog),(const gchar **)rc_artists);
@@ -222,7 +224,7 @@ printf("msg:%s\n",msg);
 		if(Msghead == NULL)
 			gtk_status_icon_set_blinking (trayIcon,FALSE);
 		
-		createChatWindow(ip,name,msg);
+		createChatWindow(ip,name,msg,"hello", 1 ,1);
 		//showMessage(msg.message,p->textViewAll);
 
 printf("-------------------[click to create window end ]----------------\n");

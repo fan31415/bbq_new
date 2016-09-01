@@ -132,4 +132,6 @@ void record_display(struct chatRecord * head);
 */
 /***************************************************/
 struct chatRecord * recordParser(char *record);
+
+struct chatRecord * setOffRecord(struct chatRecord * head);
 #endif 

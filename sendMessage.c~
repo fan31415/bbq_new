@@ -37,19 +37,23 @@ void getSystemTime(char buf[])
 	//printf("%s\n",buf);
 }
 void sendToTextView1(GtkWidget *button, textView *textViewAll)
-{
+{	printf("enter send!\n");
         GtkTextIter start,end;
 	
 	char *text;
         char *ip;
 	char *name;
-	strcpy(text,"\0");
+	//strcpy(text,"\0");
+	printf("enter send1001!\n");
 	ip = textViewAll->ip;
+	printf("enter send1002!\n");
 	gtk_text_buffer_get_bounds(GTK_TEXT_BUFFER(textViewAll->buffer2),&start,&end);
+	printf("enter send1003!\n");
 	text=gtk_text_buffer_get_text(GTK_TEXT_BUFFER(textViewAll->buffer2),&start,&end,FALSE);
-
+	printf("enter send 11!\n");
+	printf("%s\n", textViewAll->message);
 	if(strcmp(textViewAll->message,"\0")!=0)
-	{
+	{	printf("strcmp!\n");
 		strcat(text,"#");
 		strcat(text,textViewAll->message);
 g_print("%s\n","textViewAll->message != NULL");

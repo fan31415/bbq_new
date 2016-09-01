@@ -402,7 +402,7 @@ showRecord.o showRecord.o: showRecord.c /usr/include/gtk-2.0/gtk/gtk.h \
   /usr/include/bits/byteswap.h /usr/include/stdlib.h chatRecord.h \
   mytime.h /usr/include/sys/types.h /usr/include/sys/select.h \
   /usr/include/bits/select.h /usr/include/sys/sysmacros.h \
-  /usr/include/alloca.h
+  /usr/include/alloca.h global.h
 
 /usr/include/gtk-2.0/gtk/gtk.h:
 
@@ -1339,3 +1339,5 @@ mytime.h:
 /usr/include/sys/sysmacros.h:
 
 /usr/include/alloca.h:
+
+global.h:

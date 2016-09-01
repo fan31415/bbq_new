@@ -2,8 +2,8 @@
 /*名称：get_vbox_mid.h
 /*描述：1.该文件定义了用于创建皮肤选择菜单的函数
 /*     2.定义了皮肤选择菜单的回调函数。
-/*作者：何岩——team5
-/*日期：2010－07-01
+/*作者：喻兰
+/*日期：2016－08-28
 /********************************************/
 #ifndef GETMENU_STYLE_H
 #define GETMENU_STYLE_H
@@ -13,7 +13,7 @@
 函数名:		char* getstyle(char* p);
 参数:		p:所选择的皮肤选项字符串
 函数描述:	将选定的皮肤选项转化为相应的皮肤图片文件名称
-返回值:         	皮肤图片文件名称字符串	
+返回值:         	皮肤图片文件名称字符串
 */
 /********************************************/
 char* getstyle(char* p);
@@ -22,7 +22,7 @@ char* getstyle(char* p);
 函数名:		gboolean style_press( GtkWidget *widget,GdkEvent *event );
 参数:		widget:按钮控件指针；event：事件指针
 函数描述:	点击更换皮肤按钮时弹出菜单选项
-返回值:         	布尔值	
+返回值:         	bool
 */
 /********************************************/
 gboolean style_press( GtkWidget *widget,GdkEvent *event );
@@ -31,7 +31,7 @@ gboolean style_press( GtkWidget *widget,GdkEvent *event );
 函数名:		void style_response(gchar *string);
 参数:		string:图片文件名称
 函数描述:	根据图片名称更改皮肤
-返回值:         	空
+返回值:         	void
 */
 /********************************************/
 void style_response(gchar *string);
@@ -40,7 +40,7 @@ void style_response(gchar *string);
 函数名:		GtkWidget* getMenu_style(void);
 参数:		空
 函数描述:	创建皮肤选项菜单
-返回值:         	控件指针	
+返回值:         	控件指针
 */
 /********************************************/
 GtkWidget* getMenu_style(void);

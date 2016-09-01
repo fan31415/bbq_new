@@ -35,17 +35,17 @@ typedef struct _filename_textView
   textView *textViewAll;
 
 }filename_textView;
-
-
-void createChatWindow(char *ip,char *name,char *msg);
+void calc (GtkWidget *b, gpointer data ) ;
+void pg_ChatWindow(char *ip,char *name,char *msg);
+void createChatWindow(char *ip,char *name,char *msg, char * sig, int img_code, int avatar_code);
 void calendar();
 GtkWidget *xpm_label_box( gchar *xpm_filename,gchar *label_text );
 GtkWidget *label_xmp_box( gchar *label_text ,gchar *xpm_filename);
-void closeApp ( GtkWidget *window,ip_window *ip_window_main);
+void closeApp ( GtkWidget *window,ip_window * ip_window_main);
 void undo ( GtkWidget *window, textView *textViewAll);
 void fontSelect( GtkWidget *button, textView *textViewAll);
 GtkWidget *createFileSelect();
-void fileSelect(GtkWidget *button, gpointer data);
+void fileSelect(GtkWidget *button,char * data);
 void sendToTextView1(GtkWidget *button, textView *textViewAll);
 void changeFace(GtkButton* button,GtkButton* window);
 void changeImage(GtkButton* button,GtkWidget* window);

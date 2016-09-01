@@ -11,8 +11,8 @@
 		f:显示一个用户节点－display
 		g:创建一个用户－－－createOneUser
 		h:创建一个对象－－－createOneUser();
-/*作者：王学宾——team5
-/*日期：2010－06-26
+/*作者：fan---team6
+/*日期：2016-8-31
 /********************************************/
 #ifndef __USERINFO_H
 #define __USERINFO_H
@@ -136,7 +136,7 @@ void display(struct userinfo * user);
 返回值:		返回新建用户的指针
 */
 /*****************************************************************/
-struct userinfo * createOneUser(char * name, char * group,char * ip,char * signature,int picture);
+struct userinfo * createOneUser(char * name, char * group,char * ip,char * signature,int img_code, int avatar_code);
 
 
 /*****************************************************************/

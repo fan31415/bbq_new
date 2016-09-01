@@ -1,0 +1,71 @@
+autoscan: warning: missing AC_CHECK_FUNCS([getcwd]) wanted by: 
+	util.c:55
+	filetansfer.c:210
+	creat_main.c:30
+	creat_main.c:52
+autoscan: warning: missing AC_CHECK_FUNCS([gettimeofday]) wanted by: 
+	message.c:53
+autoscan: warning: missing AC_CHECK_FUNCS([memchr]) wanted by: 
+	message.c:60
+	message.c:82
+	message.c:104
+	message.c:125
+	message.c:146
+	message.c:162
+	message.c:164
+	message.c:238
+	message.c:261
+	message.c:283
+	message.c:305
+	message.c:307
+	message.c:333
+	message.c:356
+autoscan: warning: missing AC_CHECK_FUNCS([mkdir]) wanted by: 
+	creat_main.c:38
+	creat_main.c:59
+autoscan: warning: missing AC_CHECK_FUNCS([setlocale]) wanted by: 
+	creat_main.c:75
+autoscan: warning: missing AC_CHECK_FUNCS([strdup]) wanted by: 
+	message.c:118
+	message.c:139
+	message.c:178
+	message.c:183
+	message.c:254
+	message.c:276
+	message.c:323
+	message.c:376
+autoscan: warning: missing AC_CHECK_FUNCS([strstr]) wanted by: 
+	otherCallback.c:90
+autoscan: warning: missing AC_CHECK_FUNCS([strtol]) wanted by: 
+	message.c:75
+	message.c:96
+	message.c:154
+	message.c:253
+	message.c:275
+	message.c:297
+	message.c:321
+	message.c:347
+	message.c:370
+autoscan: warning: missing AC_CHECK_HEADERS([fcntl.h]) wanted by: 
+	filetansfer.c:16
+autoscan: warning: missing AC_CHECK_HEADERS([locale.h]) wanted by: 
+	creat_main.c:10
+autoscan: warning: missing AC_CHECK_HEADERS([sys/time.h]) wanted by: 
+	message.c:11
+autoscan: warning: missing AC_FUNC_MKTIME wanted by: 
+	calendar.c:25
+autoscan: warning: missing AC_FUNC_STRTOD wanted by: 
+	calc.c:50
+	calc.c:51
+autoscan: warning: missing AC_HEADER_STDBOOL wanted by: 
+	pg_ChatWindow.c:100
+	createChatWindow.c:88
+	pg_ChatWindow.c:100
+	createChatWindow.c:88
+autoscan: warning: missing AC_TYPE_SIZE_T wanted by: 
+	message.c:29
+	message.c:35
+	message.c:208
+	message.c:214
+	message.h:44
+	message.h:45

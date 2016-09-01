@@ -400,7 +400,11 @@ get_hbox_top.o get_hbox_top.o: get_hbox_top.c get_hbox_top.h \
   /usr/include/string.h /usr/include/bits/string.h \
   /usr/include/bits/string2.h /usr/include/endian.h \
   /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
-  /usr/include/stdlib.h getMenu_state.h
+  /usr/include/stdlib.h getMenu_state.h global.h /usr/include/sys/types.h \
+  /usr/include/sys/select.h /usr/include/bits/select.h \
+  /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+  /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
+  /usr/include/bits/setjmp.h /usr/include/gtk-2.0/gdk/gdkkeysyms.h
 
 get_hbox_top.h:
 
@@ -1331,3 +1335,25 @@ set_soft.h:
 /usr/include/stdlib.h:
 
 getMenu_state.h:
+
+global.h:
+
+/usr/include/sys/types.h:
+
+/usr/include/sys/select.h:
+
+/usr/include/bits/select.h:
+
+/usr/include/sys/sysmacros.h:
+
+/usr/include/alloca.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/bits/sched.h:
+
+/usr/include/bits/setjmp.h:
+
+/usr/include/gtk-2.0/gdk/gdkkeysyms.h:

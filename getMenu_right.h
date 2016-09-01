@@ -2,8 +2,8 @@
 /*名称：getMenu_right.h
 /*描述： 1、该文件定义了程序中用于创建右键菜单的函数
 	2、定义了相应的回调函数
-/*作者：何岩——team5
-/*日期：2010－07-01
+/*作者：fan---team6
+/*日期：2016-8-31
 /********************************************/
 #ifndef GETMENU_RIGHT_H
 #define GETMENU_RIGHT_H
@@ -72,7 +72,7 @@ static gint right_button_press (GtkWidget * wid, GdkEvent * event);
 */
 /**********************************************/
 void ga_add_popup_menu (GtkWidget * wid, GtkMenu * menu);
-void get_usr_info(char *name,char *group,char *ip,char *sig);
+void get_usr_info(char *name,char *group,char *ip,char *sig, int img_code, int avatar_code);
 
 extern GtkWidget *entry;
 

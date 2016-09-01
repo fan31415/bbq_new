@@ -1,3 +1,11 @@
+/**************************************************/
+/*名称：otherCallback.c
+/*描述：回调函数的集合
+/*作成日期： 2016.08.30
+/*作者：蔡新军
+/***************************************************/
+
+
 #include <stdlib.h>
 #include <string.h>
 #include <gtk/gtk.h>
@@ -6,7 +14,12 @@
 #include "chatWindow.h"
 #include "chatRecord.h"
 #include "showRecord.h"
-/* ŽŽœšÒ»žöÐÂµÄºáÏòºÐ£¬Ëü°üº¬Ò»žöÍŒÏñºÍÒ»žö±êÇ©£¬²¢·µ»ØÕâžöºÐ¡£*/
+#include "userinfo.h"
+#include "global.h"
+//extern ip_window* ip_window_main;
+extern struct userinfo *head;
+extern char date_global[10];
+
 GtkWidget *xpm_label_box( gchar     *xpm_filename,
                           gchar     *label_text )
 {
@@ -14,11 +27,11 @@ GtkWidget *xpm_label_box( gchar     *xpm_filename,
     GtkWidget *label;
     GtkWidget *image;
 
-    /* ÎªÍŒÏñºÍ±êÇ©ŽŽœšºÐ */
+  
     box = gtk_hbox_new (FALSE, 0);
     gtk_container_set_border_width (GTK_CONTAINER (box), 2);
 
-    /* ŽŽœšÒ»žöÍŒÏñ */
+   
     image = gtk_image_new_from_file (xpm_filename);
 
     /* Îª°ŽÅ¥ŽŽœšÒ»žö±êÇ© */
@@ -128,15 +141,25 @@ g_print("%s\n","RECIEVE");
 	}
 
 }
-/*¹Ø±ÕÖ÷Ž°ÌåµÄ»Øµ÷º¯Êý*/
-void closeApp ( GtkWidget *window,ip_window *ip_window_main)
+/*关闭聊天窗口*/
+void closeApp ( GtkWidget *window, ip_window * ip_window_main)
 {
+	printf("enter close!");
+	////
+  struct userinfo *u_info;
+  u_info = seekUser(head, ip_window_main->ip);
+  //
+  saveRecord(u_info->record,u_info->ip,date_global);
   printf("------------!close\n");
+  //u_info->record = setOffRecord(u_info->record);
+	u_info->record = NULL;
+	printf("go to close222222222 !\n");
   setOffTextView(ip_window_main->ip);
+	printf("go to close !\n");
   gtk_widget_destroy(ip_window_main->window);
 }
 
-/*È¡Ïû°ŽÅ¥µÄ»Øµ÷º¯Êý*/
+/*清除文本框的内容*/
 void undo ( GtkWidget *window, textView *textViewAll)
 {
   gtk_text_buffer_set_text(textViewAll->buffer2,"",-1);

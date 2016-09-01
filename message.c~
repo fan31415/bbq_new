@@ -216,11 +216,29 @@ printf("11\n");
   /*
    *信息
    */
+ ep=memchr(sp, ':', remains);
+  if (!ep) {
+printf("9\n");
+    rc=-EINVAL;
+    goto err_out;
+  }
+  *ep='\0';
+  remains =len - ((unsigned long)ep-(unsigned long)buffer);
+  if (remains<=0) {
+printf("10\n");
+    rc=-EINVAL;
+    goto err_out;
+  }
+  ++ep;
   msg->message=strdup(sp);
   printf("message:%s\n",msg->message);
+  sp=ep;
+  
+  
   /*
    *扩展信息
    */
+/*
   ep=memchr(sp, '\0', remains);
   if (!ep) {
 printf("12\n");
@@ -233,7 +251,7 @@ printf("12\n");
     sp=ep;
     msg->extstring=strdup(sp);
    printf("extention:%s\n",msg->extstring);
-  }
+  }*/
 err_out:
   free(buffer);
   return rc;
@@ -380,7 +398,7 @@ printf("11\n");
   ++ep;
   int_val=strtol(sp, (char **)NULL, 10);
 
-  u_info->u_img_code=int_val
+  u_info->u_img_code=int_val;
   printf("img code: %d\n",u_info->u_img_code);
   sp=ep;
  /*
@@ -412,6 +430,6 @@ printf("err12\n");
 }
 
 err_out:
-  memset(buffer, 0, BUFFER_SIZE);
+  free(buffer);
   return rc;
 }

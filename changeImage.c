@@ -5,17 +5,18 @@
 #include  <gdk/gdkkeysyms.h>
 #include "chatWindow.h"
 /**************************************************/
-/*Ãû³Æ£ºchangeFace
-/*ÃèÊö£º¸ü¸ÄÓÃ»§ÐÎÏó»Øµ÷º¯Êý
-/*×÷³ÉÈÕÆÚ£º 2010-07-01
-/*²ÎÊý£º
-         ²ÎÊý1£ºbutton¡¢GtkWidget*¡¢Á¬½Ó»Øµ÷º¯ÊýµÄ¿Ø¼þ£¬±ä¸üÐÎÏó°´Å¥
-         ²ÎÊý2£ºwindow¡¢GtkWidget*¡¢»Øµ÷º¯Êý´«ÈëµÄ²ÎÊý£¬ÎªÕû¸ö´°Ìå
-/*·µ»ØÖµ£ºvoid
-/*×÷Õß£ºÁõ¾°Ã÷¡ª¡ªteam5
+/*åç§°ï¼šchangeFace
+/*æè¿°ï¼šæ›´æ”¹ç”¨æˆ·å½¢è±¡å›žè°ƒå‡½æ•°
+/*ä½œæˆæ—¥æœŸï¼š 2010-07-01
+/*å‚æ•°ï¼š
+         å‚æ•°1ï¼šbuttonã€GtkWidget*ã€è¿žæŽ¥å›žè°ƒå‡½æ•°çš„æŽ§ä»¶ï¼Œå˜æ›´å½¢è±¡æŒ‰é’®
+         å‚æ•°2ï¼šwindowã€GtkWidget*ã€å›žè°ƒå‡½æ•°ä¼ å…¥çš„å‚æ•°ï¼Œä¸ºæ•´ä¸ªçª—ä½“
+/*è¿”å›žå€¼ï¼švoid
+/*ä½œè€…ï¼šå¸¸è€€è€€
+/*æ—¶é—´ï¼š2016-08-29
 /***************************************************/
 
-/*¸Ä±äÓÃ»§ÐÎÏó*/
+/*æ”¹å˜ç”¨æˆ·å½¢è±¡*/
 void file_ok_sel_image(GtkWidget *button, GtkFileSelection *fs)
 {
    gchar *filename = gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
@@ -27,8 +28,7 @@ void changeImage(GtkButton* button,GtkWidget* window)
 {
     GtkWidget *filew;
     filew = createFileSelect();
-     /* Îªok_button°´Å¥ÉèÖÃ»Øµ÷º¯Êý£¬Á¬½Óµ½file_ok_sel functionº¯Êý */
     g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filew)->ok_button),
-		      "clicked", 
+		      "clicked",
                       G_CALLBACK (file_ok_sel_image), filew);
 }

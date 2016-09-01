@@ -14,7 +14,7 @@ chatRecord.o chatRecord.o: chatRecord.c chatRecord.h /usr/include/stdio.h \
   /usr/include/time.h /usr/include/bits/time.h /usr/include/sys/types.h \
   /usr/include/sys/select.h /usr/include/bits/select.h \
   /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h \
-  /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+  /usr/include/bits/pthreadtypes.h /usr/include/alloca.h util.h
 
 chatRecord.h:
 
@@ -83,3 +83,5 @@ mytime.h:
 /usr/include/bits/pthreadtypes.h:
 
 /usr/include/alloca.h:
+
+util.h:

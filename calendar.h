@@ -7,7 +7,6 @@
 //#include<calendar.h>
 #include  <gdk/gdkkeysyms.h>
 #include "chatWindow.h"
-/*¶šÒåÈÕÀúœá¹¹Ìå*/
 #define DEF_PAD 10
 #define DEF_PAD_SMALL 5
 #define TM_YEAR_BASE 1900
@@ -23,11 +22,11 @@ typedef struct _CalendarData {
   GtkWidget *month;
 } CalendarData;
 
-/*¶šÒåÈÕÀúÏÔÊŸÃ¶ŸÙÀàÐÍ£¬ÓÃÓÚžŽÑ¡¿ò²Ù×÷*/
+/*函数接口*/
 enum {
   calendar_show_header,
   calendar_show_days,
-  calendar_month_change, 
+  calendar_month_change,
   calendar_show_week,
   calendar_monday_first
 };

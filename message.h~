@@ -30,7 +30,8 @@ typedef struct _user_info{
 	char * u_group;
 	int u_pic_id;
 	char * u_qianming;
-	int image_code; //形象代码
+	int u_img_code; //形象代码
+	int u_avatar_code;
 }u_info_t;
 
 const char *refer_user_name_from_msg(const msg_data_t *msg);

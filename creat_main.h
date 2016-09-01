@@ -32,7 +32,6 @@ GtkStatusIcon *trayIcon;
 char *msg;
 }tray_icon;
 */
-
 GtkStatusIcon *trayIcon;
 //char * filename = "../Icon/bg2.jpg";
 /********************************************/

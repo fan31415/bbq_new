@@ -1,55 +1,96 @@
-#include <stdlib.h>
-#include <string.h>
 #include <gtk/gtk.h>
 #include <time.h>
 #include  <gdk/gdkkeysyms.h>
+#include<netinet/in.h>  // sockaddr_in 
+#include<sys/types.h>  // socket 
+#include<sys/socket.h>  // socket 
+#include<stdio.h>    // printf 
+#include<stdlib.h>    // exit 
+#include<string.h>    // bzero 
 #include "chatWindow.h"
+#include "linpop.h"
+#include"msgsend.h"
 
+ char file_send_path[80];
+extern textView *textViewAll;
+extern int s;
+char my_ip[30];
 GtkWidget *createFileSelect()
 {
    GtkWidget *filew;   
-    /* ´´½¨Ò»¸öÐÂµÄÎÄ¼þÑ¡Ôñ¹¹¼þ */
-    filew = gtk_file_selection_new ("Ñ¡ÔñÎÄ¼þ");
+    /* åˆ›å»ºä¸€ä¸ªæ–°çš„æ–‡ä»¶é€‰æ‹©æž„ä»¶ */
+
+    filew = gtk_file_selection_new ("é€‰æ‹©æ–‡ä»¶");
 
     gtk_window_set_position (GTK_WINDOW (filew), GTK_WIN_POS_MOUSE);
     
-    /* Îªcancel_buttonÉèÖÃ»Øµ÷º¯Êý£¬Ïú»Ù¹¹¼þ */
+    /* ä¸ºcancel_buttonè®¾ç½®å›žè°ƒå‡½æ•°ï¼Œé”€æ¯æž„ä»¶ */
     gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (filew)->cancel_button),
 	                      "clicked", 
                               GTK_SIGNAL_FUNC(gtk_widget_destroy), 
 			      GTK_OBJECT(filew));
     
-    /* ÉèÖÃÎÄ¼þÃû£¬±ÈÈçÕâ¸öÒ»¸öÎÄ¼þ±£´æ¶Ô»°¿ò£¬ÎÒÃÇ¸øÁËÒ»¸öÈ±Ê¡ÎÄ¼þÃû */
+    /* è®¾ç½®æ–‡ä»¶åï¼Œæ¯”å¦‚è¿™ä¸ªä¸€ä¸ªæ–‡ä»¶ä¿å­˜å¯¹è¯æ¡†ï¼Œæˆ‘ä»¬ç»™äº†ä¸€ä¸ªç¼ºçœæ–‡ä»¶å */
     gtk_file_selection_set_filename (GTK_FILE_SELECTION(filew), 
 				     "penguin.png");
     gtk_widget_show (filew);
     return filew;
 }
 
-/*ÎÄ¼þÑ¡ÔñÈ·ÈÏ°´Å¥»Øµ÷º¯Êý*/
+/*æ–‡ä»¶é€‰æ‹©ç¡®è®¤æŒ‰é’®å›žè°ƒå‡½æ•°*/
+
 void file_ok_sel(GtkWidget *button, GtkFileSelection *fs)
 { 
-   g_print ("%s\n", gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs)));
+	//strcpy(file_send_path, "\0");
+	GFile* gfile = g_file_new_for_path(gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs)));
+	char * temp = g_file_get_basename(gfile);
+	memset(file_send_path,0,80);
+	strcpy(file_send_path,temp);
+	
+    g_print("%s\n", gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs)));
+   printf("debug--%s\n",file_send_path);
+
+
+ //  return 0;
+   	struct sockaddr_in addr;
+	bzero(&addr, sizeof(struct sockaddr_in));
+printf("file 111\n");
+	addr.sin_family=AF_INET;
+	addr.sin_port = htons(LINPOP_PORT); 
+printf("file 112\n");
+//printf("%s\n", textViewAll->ip);
+	inet_pton(AF_INET,my_ip,&addr.sin_addr.s_addr);
+printf("file 113\n");
+printf("path %s\n", file_send_path);
+	if(msg_send(LINPOP_SENDFILEREQUEST,file_send_path,(struct sockaddr_in*)&addr,s) != 0){
+		die("send file error\n");
+	}
+	printf("end file ok sel\n");
    gtk_widget_destroy(fs);
 }
 /**************************************************/
-/*Ãû³Æ£ºfileSelect
-/*ÃèÊö£º´«ËÍÎÄ¼þ»Øµ÷º¯Êý
-/*×÷³ÉÈÕÆÚ£º 2010-07-01
-/*²ÎÊý£º
-         ²ÎÊý1£ºbutton¡¢GtkWidget*¡¢Á¬½Ó»Øµ÷º¯ÊýµÄ¿Ø¼þ£¬ÎÄ¼þ´«ËÍ
-         ²ÎÊý2£ºdata¡¢gpointer¡¢»Øµ÷º¯Êý´«ÈëµÄ²ÎÊý£¬ÉèÖÃNULL
-/*·µ»ØÖµ£ºvoid
-/*×÷Õß£ºÁõ¾°Ã÷¡ª¡ªteam5
+/*åç§°ï¼šfileSelect
+/*æè¿°ï¼šä¼ é€æ–‡ä»¶å›žè°ƒå‡½æ•°
+/*ä½œæˆæ—¥æœŸï¼š 2010-07-01
+/*å‚æ•°ï¼š
+         å‚æ•°1ï¼šbuttonã€GtkWidget*ã€è¿žæŽ¥å›žè°ƒå‡½æ•°çš„æŽ§ä»¶ï¼Œæ–‡ä»¶ä¼ é€
+         å‚æ•°2ï¼šdataã€gpointerã€å›žè°ƒå‡½æ•°ä¼ å…¥çš„å‚æ•°ï¼Œè®¾ç½®NULL
+/*è¿”å›žå€¼ï¼švoid
+/*ä½œè€…ï¼šåˆ˜æ™¯æ˜Ž--team5
 /***************************************************/
 
-/*ÎÄ¼þÑ¡Ôñ°´Å¥»Øµ÷º¯Êý*/
-void fileSelect(GtkWidget *button, gpointer data)
-{
+/*æ–‡ä»¶é€‰æ‹©æŒ‰é’®å›žè°ƒå‡½æ•°*/
+void fileSelect(GtkWidget *button, char * data)
+{	strcpy(my_ip, data);	
     GtkWidget *filew;
     filew = createFileSelect();
-     /* Îªok_button°´Å¥ÉèÖÃ»Øµ÷º¯Êý£¬Á¬½Óµ½file_ok_sel functionº¯Êý */
+     /* ä¸ºok_buttonæŒ‰é’®è®¾ç½®å›žè°ƒå‡½æ•°ï¼Œè¿žæŽ¥åˆ°file_ok_sel functionå‡½æ•° */
     g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filew)->ok_button),
 		      "clicked", 
                       G_CALLBACK (file_ok_sel), filew);
 }
+
+
+
+  
+

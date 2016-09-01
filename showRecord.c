@@ -2,7 +2,7 @@
 #include<string.h>
 #include "chatRecord.h"
 #include "mytime.h"
-
+#include "global.h"
 typedef struct _ip_calendar
 {
 	char * ip;
@@ -10,7 +10,7 @@ typedef struct _ip_calendar
 }ip_calendar;
 
 static GtkWidget *list;
-
+extern char date_global[10];
 enum
 {
   LIST_ITEM = 0,
@@ -41,10 +41,11 @@ void init_list(GtkWidget *list)
 {
   GtkListStore *store;
   GtkTreeIter iter;
-
+  
   store = GTK_LIST_STORE(gtk_tree_view_get_model
       (GTK_TREE_VIEW(list)));
   gtk_list_store_append(store, &iter);
+  printf("caicai----debug---------11-------\n");
   gtk_list_store_set(store, &iter, LIST_ITEM, str, -1);
 }
 /*************************************************************
@@ -59,8 +60,11 @@ void record_remove_all()
   store = GTK_LIST_STORE(gtk_tree_view_get_model(
       GTK_TREE_VIEW (list)));
   model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
+
+  printf("caicai----debug---------3-------\n");
   if (gtk_tree_model_get_iter_first(model, &iter) == FALSE) 
       return;
+  printf("caicai----debug---------4-------\n");
   gtk_list_store_clear(store);
 }
 /*************************************************************
@@ -75,21 +79,23 @@ void on_ok_clicked(GtkButton* button,ip_calendar *ip_date)
 	guint date1;
 	gtk_calendar_get_date(GTK_CALENDAR(ip_date->calendar),&year,&month,&date1);
 	month = month+1;
- 	char c[10];
+ 	
+	char selected_date[10];
+	selected_date[0]=year/1000+48;
+	selected_date[1]=(year%1000)/100+48;
+	selected_date[2]=(year%100)/10+48;
+	selected_date[3]=(year%10)+48;
+	selected_date[4]=(month/10)+48;
+	selected_date[5]=(month%10)+48;
+	selected_date[6]=(date1/10)+48;
+	selected_date[7]=(date1%10)+48;
+	selected_date[8]='\0';
+	g_print("caicai-----debug---------2-----%s\n",selected_date);
 
-	c[0]=year/1000+48;
-	c[1]=(year%1000)/100+48;
-	c[2]=(year%100)/10+48;
-	c[3]=(year%10)+48;
-	c[4]=(month/10)+48;
-	c[5]=(month%10)+48;
-	c[6]=(date1/10)+48;
-	c[7]=(date1%10)+48;
-	c[8]='\0';
-	g_print("%s\n",c);
 	record_remove_all();
-
-	head = readRecord(ip_date->ip,c);
+	
+	g_print("caicai-----debug---------6-----%s\n",selected_date);
+	head = readRecord(ip_date->ip,selected_date);
 	while(NULL!=head)
 	{
 		strcat(head->username,head->date);
@@ -101,19 +107,32 @@ void on_ok_clicked(GtkButton* button,ip_calendar *ip_date)
 void show_record_quit(GtkWidget *widget,GtkWidget *window){
 	gtk_widget_destroy(window);
 }
+void show_current_record(ip_calendar *ip_date){
+	struct chatRecord * head;
+	head = readRecord(ip_date->ip,date_global);
+	while(NULL!=head)
+	{
+		strcat(head->username,head->date);
+		add_to_list(list, head->username);
+		add_to_list(list, head->record);
+		head = head->next;
+	}
+}
 /*************************************************************
 显示record主函数
 *************************************************************/
 void show_record(char *ip)
 {
 	GtkWidget *sw;
-	 GtkWidget *window;
+	GtkWidget *window;
  	GtkWidget *hbox;
 	ip_calendar *ip_date = (ip_calendar *)malloc(sizeof(ip_calendar));
 
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	//gtk_window_set_decorated (GTK_WINDOW(window),FALSE); 
+
 	g_signal_connect(G_OBJECT(window),"destroy",G_CALLBACK(show_record_quit),window);
+
 	gtk_window_set_title(GTK_WINDOW(window),"RECORD");
 	gtk_window_set_position(GTK_WINDOW(window),GTK_WIN_POS_CENTER);
 	gtk_container_set_border_width(GTK_CONTAINER(window),0);
@@ -125,13 +144,16 @@ void show_record(char *ip)
             GTK_SHADOW_ETCHED_IN);
 
   	hbox = gtk_hbox_new(FALSE, 0);
+
   	gtk_box_pack_start(GTK_BOX(hbox), sw, TRUE, TRUE, 0);
 
 	list = gtk_tree_view_new();
   	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(list), FALSE);
 
   	ip_date->calendar = gtk_calendar_new();
+
 	ip_date->ip = ip;
+	
 
 	gtk_box_pack_start(GTK_BOX(hbox), ip_date->calendar, FALSE, FALSE, 0);
 	
@@ -139,10 +161,11 @@ void show_record(char *ip)
   	gtk_container_add(GTK_CONTAINER(window), hbox);
 
   	init_list(list);
+	printf("caicai-----debug------------1----------\n");
 	g_signal_connect (ip_date->calendar, "day_selected", 
 		    G_CALLBACK (on_ok_clicked),
 		    ip_date);
-
+	show_current_record(ip_date);
 	gtk_widget_show_all(window);
 }
 

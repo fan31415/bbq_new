@@ -408,7 +408,9 @@ creat_main.o creat_main.o: creat_main.c creat_main.h /usr/include/stdio.h \
   get_vbox_mid.h userinfo.h /usr/include/malloc.h utf16_to_utf8.h \
   /usr/include/iconv.h chatWindow.h /usr/include/gtk-2.0/gdk/gdkkeysyms.h \
   chatRecord.h mytime.h get_hbox_bottom.h /usr/include/locale.h \
-  /usr/include/bits/locale.h
+  /usr/include/bits/locale.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/sys/stat.h /usr/include/bits/stat.h
 
 creat_main.h:
 
@@ -1371,3 +1373,15 @@ get_hbox_bottom.h:
 /usr/include/locale.h:
 
 /usr/include/bits/locale.h:
+
+/usr/include/unistd.h:
+
+/usr/include/bits/posix_opt.h:
+
+/usr/include/bits/confname.h:
+
+/usr/include/getopt.h:
+
+/usr/include/sys/stat.h:
+
+/usr/include/bits/stat.h:

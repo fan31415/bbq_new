@@ -44,7 +44,7 @@ struct userinfo
     char  signature[SIZE_2];
     int picture;
     int image_code;//用户形象代码
-    int avatar_code;
+    int avatar_code;//avatar code
     textView *textViewAll; //add by wanglong 2010-07-08
     struct chatRecord * record;
     struct userinfo * next;
@@ -136,7 +136,7 @@ void display(struct userinfo * user);
 返回值:		返回新建用户的指针
 */
 /*****************************************************************/
-struct userinfo * createOneUser(char * name, char * group,char * ip,char * signature,int picture);
+struct userinfo * createOneUser(char * name, char * group,char * ip,char * signature,int img_code, int avatar_code);
 
 
 /*****************************************************************/

@@ -5,14 +5,15 @@
 #include  <gdk/gdkkeysyms.h>
 #include "chatWindow.h"
 /**************************************************/
-/*Ãû³Æ£ºchangeFace
-/*ÃèÊö£º¸ü¸Ä½çÃæÆ¤·ô»Øµ÷º¯Êý
-/*×÷³ÉÈÕÆÚ£º 2010-07-01
-/*²ÎÊý£º
-         ²ÎÊý1£ºbutton¡¢GtkWidget*¡¢Á¬½Ó»Øµ÷º¯ÊýµÄ¿Ø¼þ£¬¸ü±äÆ¤·ô°´Å¥
-         ²ÎÊý2£ºwindow¡¢GtkButton¡¢»Øµ÷º¯Êý´«ÈëµÄ²ÎÊý£¬ÎªÕû¸ö´°Ìå
-/*·µ»ØÖµ£ºvoid
-/*×÷Õß£ºÁõ¾°Ã÷¡ª¡ªteam5
+/*åç§°ï¼šchangeFace
+/*æè¿°ï¼šæ›´æ”¹ç•Œé¢çš®è‚¤å›žè°ƒå‡½æ•°
+/*ä½œæˆæ—¥æœŸï¼š 2010-07-01
+/*å‚æ•°ï¼š
+         å‚æ•°1ï¼šbuttonã€GtkWidget*ã€è¿žæŽ¥å›žè°ƒå‡½æ•°çš„æŽ§ä»¶ï¼Œæ›´å˜çš®è‚¤æŒ‰é’®
+         å‚æ•°2ï¼šwindowã€GtkButtonã€å›žè°ƒå‡½æ•°ä¼ å…¥çš„å‚æ•°ï¼Œä¸ºæ•´ä¸ªçª—ä½“
+/*è¿”å›žå€¼ï¼švoid
+/*ä½œè€…ï¼šå–»å…°
+/*æ—¶é—´ï¼š2016-8-29
 /***************************************************/
 void changeFace(GtkButton* button,GtkButton* window)
 {
@@ -21,7 +22,7 @@ void changeFace(GtkButton* button,GtkButton* window)
 	gint response;
         GdkColor color;
 
-	dialog = gtk_color_selection_dialog_new("Ñ¡Ôñ±³¾°ÑÕÉ«");
+	dialog = gtk_color_selection_dialog_new("é€‰æ‹©èƒŒæ™¯é¢œè‰²");
 	gtk_window_set_transient_for(GTK_WINDOW(dialog),GTK_WINDOW(window));
 	colorsel = GTK_COLOR_SELECTION(GTK_COLOR_SELECTION_DIALOG(dialog)->colorsel);
 	gtk_color_selection_set_has_opacity_control(colorsel,TRUE);
@@ -32,11 +33,11 @@ void changeFace(GtkButton* button,GtkButton* window)
 	gtk_color_selection_set_current_color(colorsel,&color);
 	response = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (response == GTK_RESPONSE_OK)
-	{	
+	{
             gtk_color_selection_get_current_color (colorsel, &color);
             gtk_widget_modify_bg (window, GTK_STATE_NORMAL, &color);
-	    
-	}	
-      
+
+	}
+
 	gtk_widget_destroy(dialog);
 }

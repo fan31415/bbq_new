@@ -1,21 +1,16 @@
+/**************************************************/
+/*名称：fontSelect.c
+/*描述：选择字体的函数，在聊天框中点击“字体”按钮时所调用的回调函数
+/*作成日期： 2016.8.31
+/*作者： 高静雯
+/***************************************************/
 #include <stdlib.h>
 #include <string.h>
 #include <gtk/gtk.h>
 #include <time.h>
 #include  <gdk/gdkkeysyms.h>
 #include "chatWindow.h"
-/**************************************************/
-/*Ãû³Æ£ºfontSelect
-/*ÃèÊö£ºžüžÄ×ÖÌå»Øµ÷º¯Êý
-/*×÷³ÉÈÕÆÚ£º 2010-07-01
-/*²ÎÊý£º
-         ²ÎÊý1£ºbutton¡¢GtkWidget*¡¢Á¬œÓ»Øµ÷º¯ÊýµÄ¿ØŒþ£¬×ÖÌå°ŽÅ¥
-         ²ÎÊý2£ºdata¡¢gpointer¡¢»Øµ÷º¯ÊýŽ«ÈëµÄ²ÎÊý£¬ÉèÖÃNULL
-/*·µ»ØÖµ£ºvoid
-/*×÷Õß£ºÁõŸ°Ã÷¡ª¡ªteam5
-/***************************************************/
 
-/*×ÖÌåÑ¡ÔñÈ·ÈÏ°ŽÅ¥»Øµ÷º¯Êý*/
 void font_selection_ok( GtkWidget *button, fontWindow_textView *fontWindow_textViewAll)
 {
 
@@ -38,13 +33,13 @@ void font_selection_ok( GtkWidget *button, fontWindow_textView *fontWindow_textV
   g_print("font_ok");
 }
 
-/*×ÖÌåÑ¡Ôñ°ŽÅ¥»Øµ÷º¯Êý,ŽŽœš×ÖÌåÑ¡Ôñ¿ò*/
+
 void fontSelect( GtkWidget *button, textView *textViewAll)
 {
 
     GtkWidget *window;
 
-    window = gtk_font_selection_dialog_new ("Linpop v1.0 字体选择");
+    window = gtk_font_selection_dialog_new ("BBQ 1.0 字体选择");
 
     gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_MOUSE);
 

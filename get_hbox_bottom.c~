@@ -1,8 +1,8 @@
 /********************************************/
 /*名称：get_hbox_bottom.c
 /*描述： 该文件定义了用于创建主界面底部容器的函数
-/*作者：何岩——team5
-/*日期：2010－07-01
+/*作者：高静雯——team6
+/*日期：2016－8－31
 /********************************************/
 #include "mytime.h"
 #include "get_hbox_bottom.h"
@@ -10,6 +10,7 @@
 #include "set_soft.h"
 #include "calendar.h"
 #include "getMenu_style.h"
+#include "tips.h"
 #define padding 3
 
 GtkWidget* get_hbox_bottom(){
@@ -21,6 +22,7 @@ GtkWidget* get_hbox_bottom(){
 	GtkWidget *refresh;
 	GtkWidget *set_soft;
 	GtkWidget *timeImage;
+	GtkWidget *tip;
 	char buf[128];
 	hbox_bottom = gtk_hbox_new (FALSE,10);
 	//gtk_container_set_border_width (GTK_CONTAINER(hbox_bottom), 10);
@@ -46,6 +48,14 @@ GtkWidget* get_hbox_bottom(){
 	gtk_button_set_image(time, timeImage);
 	g_signal_connect(G_OBJECT(time), "clicked", G_CALLBACK(create_calendar), NULL);	
 	gtk_box_pack_start(GTK_BOX (hbox_bottom),time,FALSE,TRUE,padding);
+	gtk_widget_set_tooltip_text(time,"日历");
+//小Q提醒
+	tip= pic_button("Icon/tips.svg");
+	gtk_button_set_focus_on_click(GTK_BUTTON(tip), FALSE);
+ 	gtk_button_set_relief(GTK_BUTTON(tip),GTK_RELIEF_NONE);
+	g_signal_connect(G_OBJECT(tip), "clicked",G_CALLBACK (create_tips),NULL);
+	gtk_widget_set_tooltip_text(tip,"小Q提醒");
+    	gtk_box_pack_start(GTK_BOX (hbox_bottom),tip,FALSE,TRUE,padding);
 //更换皮肤
 /*
 	swap_style = pic_button("Icon/style.svg");
@@ -70,7 +80,8 @@ GtkWidget* get_hbox_bottom(){
 	g_signal_connect(G_OBJECT(help), "clicked",G_CALLBACK (show_about),NULL);
 	gtk_widget_set_tooltip_text(help,"软件帮助");
     	gtk_box_pack_start(GTK_BOX (hbox_bottom),help,FALSE,TRUE,padding);
-
+	
+	
 
 	return hbox_bottom;
 }

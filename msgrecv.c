@@ -3,30 +3,10 @@
 /*描述： 本程序包括接收消息线程和消息处理线程函数
 /*	为了方便测试，程序里面有一些用户打印信息的
 /*	函数（有些已经注释了，有些还没有注释）。
-/*作者：王龙——team5
-/*日期：2010－06-27
+/*作者：蔡新军——team6
+/*日期：2016-08-30
 /********************************************/
-
-#include <stdlib.h>
-#include <unistd.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <netinet/in.h>
-#include <stdio.h>
-#include <sys/socket.h>
-#include <gtk/gtk.h>
-#include "global.h"
 #include "msgrecv.h"
-#include "message.h"
-#include "linpop.h"
-#include "userinfo.h"
-#include "callbacks.h"
-#include "chatWindow.h"
-#include "creat_main.h"
-#include "util.h"
-#include "msg_list.h"
-
-#define STR_SIZE 512
 //存储用户信息链表，在main.c中已经声明了。
 extern struct userinfo *head;
 extern GtkStatusIcon *trayIcon;
@@ -34,9 +14,9 @@ extern GtkStatusIcon *trayIcon;
 
 extern int my_img_code;
 extern int my_avatar_code;
-extern char * user_name;
-extern char * user_group;
-extern char * sigh;
+extern char  user_name[100];
+extern char  user_group[100];
+extern char  sigh[100];
 char  img_code_str[255];
 char  avatar_code_str[255];
 char userString[STR_SIZE];
@@ -44,45 +24,38 @@ char userString[STR_SIZE];
 char temp[255];
 
 /**************************************************/
-/*名称：chat_start
-/*描述：本函数是接收消息的监听线程的执行方法体，程序采用死循环，
-/*	不停的接收网络上的数据，然后开辟一个线程，将接收到的
-/*	数据包传给处理线程的执行函数handle。然后又继续监听新
-/*	的网络数据包
-/*作成日期： 2010-06-27
+/*名称：setUserString
+/*描述：用字符串设置用户的某些信息
+
+/*作成日期： 2016-08-30
 /*参数：
          无
 /*返回值：void
-/*作者：王龙——team5
+/*作者：Fan——team6
 /***************************************************/
-/*
-void img2Str() {
-	memset(img_code_str, 0, 255);
-	sprintf(img_code_str, "%d", my_img_code);
 
-}
-void avatar2Str() {
-	memset(avatar_code_str, 0, 255);
-	sprintf(avatar_code_str, "%d", my_avatar_code);
 
-}*/
 void setUserString() {
+	printf("\n\n\nuser string set started!\n");
 	memset(userString, 0 ,STR_SIZE);
+	strcat(userString, "\0");
 	int  img_code = my_img_code;
 	int avatar_code = my_avatar_code;
 	printf("img code : %d\n", img_code);
 	printf("avatar code : %d\n", avatar_code);
-	char * m_user_name = user_name;
-	char * m_user_group = user_group;
+	//char * m_user_name = user_name;
+	//char * m_user_group = user_group;
 	char img[5] = {0};
 	int2str(my_img_code, img);
 	char  avatar[5]= {0};
 	int2str(my_avatar_code, avatar);
 	printf("img code : %s\n", img);
 	printf("avatar code : %s\n", avatar);
-	strcat(userString, m_user_name);
+	printf("user_name %s\n",user_name);
+	printf("user_group %s\n", user_group);
+	strcat(userString, user_name);
 	strcat(userString, "_");
-	strcat(userString, m_user_group);
+	strcat(userString, user_group);
 	strcat(userString, "_");
 	//pic id 3
 	char pic_id[5]= {0};
@@ -98,25 +71,40 @@ void setUserString() {
 	strcat(userString, avatar);
 	strcat(userString, "_");
 	strcat(userString, "\0");
-	printf("user string%s\n", userString);
-	return userString;
+	printf("user string%s\n\n\n", userString);
+	//return userString;
 }
-
+/**************************************************/
+/*名称：chat_start
+/*描述：本函数是接收消息的监听线程的执行方法体，程序采用死循环，
+/*	不停的接收网络上的数据，然后开辟一个线程，将接收到的
+/*	数据包传给处理线程的执行函数handle。然后又继续监听新
+/*	的网络数据包
+/*作成日期： 2016-08-30
+/*参数：
+         无
+/*返回值：void
+/*作者：蔡新军——team6
+/***************************************************/
 void *chat_start()
 {
 printf("chat_start is runing!\n");
 	int i;
 	char buf[1024];
 	int len = 0;
-	setUserString();
+	//setUserString();
 	struct sockaddr_in addr;
 	struct sockaddr_in client;//本地网络信息
 	argu_pthread_t argu;
 
+	printf("enter before sleep\n");
+
 	int addrLen = sizeof(struct sockaddr_in);
 	sleep(2);
-//我在线
-	if(msg_send(LINPOP_BR_ENTRY,userString,NULL,s) != 0)
+//我在线  
+	
+	printf("user name %s\n", user_name);
+	if(msg_send(LINPOP_BR_ENTRY,user_name,NULL,s) != 0)
 		die("send error!");
 
 	while(1)
@@ -154,12 +142,13 @@ printf("******************************\n");
 /**************************************************/
 /*名称：handle
 /*描述：消息处理的线程执行的函数体
-/*作成日期： 2010-06-27
+/*作成日期： 2016-08-30
 /*参数：
          参数1：argu、argu_pthread_t*、输入参数、传递给处理线程的参数。这个数据包包含接收到的网络数据包和发送端的网络地址信息
 /*返回值：返回值名称 、类型 、  含义
 /*	 0        、int 、  执行成功
-/*作者：王龙——team5
+/*作成日期： 2016-08-30
+/*作者：蔡新军——team6
 /***************************************************/
 
 
@@ -208,7 +197,7 @@ printf("---inner thread ---\n");
 		case LINPOP_BR_EXIT://用户退出
 			break;
 		case LINPOP_ANSENTRY://应答用户在线
-			if(msg.command_opts == LINPOP_NOOPERATION )//记录linpop客户的信息
+			if(msg.command_opts == LINPOP_NOOPERATION )
 			{
 				memcpy(buf,msg.message,1024);
 				if ( parse_u_info(&u_info,buf,strlen(buf)) != 0)
@@ -222,7 +211,7 @@ printf("befor [%s|%s|%s|%d|%s]\n",u_info.u_name,u_info.u_group,inet_ntoa(client.
 //				strcpy(user.signature,u_info.u_qianming);
 				
 
-				user =  createOneUser(u_info.u_name, u_info.u_group,inet_ntoa(client.sin_addr),u_info.u_qianming,u_info.u_pic_id);
+				user =  createOneUser(u_info.u_name, u_info.u_group,inet_ntoa(client.sin_addr),u_info.u_qianming,u_info.u_img_code, u_info.u_avatar_code);
 
 				//user =  createOneUser(u_info.u_name, "我的好友",inet_ntoa(client.sin_addr),u_info.u_qianming,u_info.u_pic_id);
 
@@ -244,10 +233,9 @@ printf("befor [%s|%s|%s|%d|%s]\n",u_info.u_name,u_info.u_group,inet_ntoa(client.
 
 
 
-				//user =  createOneUser(msg.username,msg.hostname,inet_ntoa(client.sin_addr),msg.message,0);
-				user =  createOneUser(msg.username,"我的好友",inet_ntoa(client.sin_addr),msg.message,0);
-
-				
+				//user =  createOneUser(msg.username,msg.hostname,inet_ntoa(client.sin_addr),msg.messagev,0);
+	break;		
+	user =  createOneUser(msg.username,"我的好友",inet_ntoa(client.sin_addr),msg.message,1, 1);			
 				//head=addUser(head,&user);
 			}
 			head=addUser(head,user);
@@ -324,19 +312,24 @@ printf("befor [%s|%s|%s|%d|%s]\n",u_info.u_name,u_info.u_group,inet_ntoa(client.
 
 //add msg to record start WXB 2010-07-12
 
-        char myTime[30];
+             char myTime[30];
 	char recordName[20];
-        char recordMessage[200];
+    char recordMessage[200];
 	struct chatRecord * node = NULL;
         strcpy(recordName,msg.username);
         strcpy(recordMessage,msg.message);
 	getCurrentTime(myTime,30);
-
-	node=createRecordNode(recordName,myTime,NULL,recordMessage);
-printf("!!!!!!!!!!!!!!!!\n");
-printf("%s\n",recordName);
-printf("!!!!!!!!!!!!!!!!\n");
+	printf("-------------------%s------------%s\n",recordName,recordMessage);
+	//创建新的记录节点
+	node = createRecordNode(recordName,myTime,NULL,recordMessage);
+	
+	printf("caicai---------------debug7----!!!!!!!!!!!!!!!!\n");
+	printf("-------------------%s------------%s\n",recordName,recordMessage);
+	printf("caicai---------------debug8----!!!!!!!!!!!!!!!!\n");
+	//p 是 userinfo型的
 	p->record = addRecordNode(p->record,node);	
+	//保存消息记录
+	//saveRecord(p->record,p->ip,date_global);
 
 
 //add msg to record end
@@ -357,6 +350,7 @@ printf("!!!!!!!!!!!!!!!!\n");
 			//解析文件名称，作为tcp客户端尝试连接服务器，准备接受文件，
 //			if(msg_send(LINPOP_SENDMSG,"i have received you message  !",(struct sockaddr *)&client,s) != 0)
 //				die("send error!");
+			printf("*************************message %s\n", msg.message);
 			file_recv(client,msg.message);
 			break;
 			

@@ -23,7 +23,7 @@ struct _item_image{
 	 gchar *fcname;
 	 gchar *fcimage;
 };
-
+void send_info(GtkWidget *button, gpointer data);
 
 GtkListStore* create_list_model(void);
 GtkWidget* create_list(GtkListStore *list_store);

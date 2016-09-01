@@ -1,3 +1,12 @@
+/**************************************************/
+/*名称:sendMessage
+/*描述：发送信息
+/*作成日期：2016-8-27 
+/*参数：
+/*返回值：返回值名称、类型、含义
+	VOID。
+/*作者：	FAN
+/***************************************************/
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -12,20 +21,8 @@
 #include "chatWindow.h"
 #include "linpop.h"
 
-/**************************************************/
-/*Ãû³Æ£ºsendToTextView1
-/*ÃèÊö£º·¢ËÍÏûÏ¢»Øµ÷º¯Êý
-/*×÷³ÉÈÕÆÚ£º 2010-07-01
-/*²ÎÊý£º
-         ²ÎÊý1£ºbutton¡¢GtkWidget*¡¢Á¬œÓ»Øµ÷º¯ÊýµÄ¿ØŒþ£¬·¢ËÍ°ŽÅ¥
-         ²ÎÊý2£ºbuffer¡¢GtkTextBuffer¡¢»Øµ÷º¯ÊýŽ«ÈëµÄ²ÎÊý£¬ÎªœÓÊÕÏûÏ¢Ž°ÌåµÄ»º³åÇøÓò
-/*·µ»ØÖµ£ºvoid
-/*×÷Õß£ºÁõŸ°Ã÷¡ª¡ªteam5
-/***************************************************/
-/*œ«·¢ËÍÎÄ±Ÿ¿òµÄÎÄ±Ÿ·¢ËÍµœœÓÊÕÎÄ±Ÿ¿ò*/
 
 
-//add by wanglong socket 
 extern int s;
 void getSystemTime(char buf[])
 {
@@ -36,20 +33,34 @@ void getSystemTime(char buf[])
 	strftime(buf,30,"%H:%M:%S",p);
 	//printf("%s\n",buf);
 }
+
+/**************************************************/
+/*名称:sendToTextView1
+/*描述：发送到文本框
+/*作成日期：2016-8-27 
+/*参数：
+/*返回值：返回值名称、类型、含义
+	VOID。
+/*作者：	FAN
+/***************************************************/
 void sendToTextView1(GtkWidget *button, textView *textViewAll)
-{
+{	printf("enter send!\n");
         GtkTextIter start,end;
 	
 	char *text;
         char *ip;
 	char *name;
 	//strcpy(text,"\0");
+	printf("enter send1001!\n");
 	ip = textViewAll->ip;
+	printf("enter send1002!\n");
 	gtk_text_buffer_get_bounds(GTK_TEXT_BUFFER(textViewAll->buffer2),&start,&end);
+	printf("enter send1003!\n");
 	text=gtk_text_buffer_get_text(GTK_TEXT_BUFFER(textViewAll->buffer2),&start,&end,FALSE);
+	printf("enter send 11!\n");
 
 	if(strcmp(textViewAll->message,"\0")!=0)
-	{
+	{	printf("strcmp!\n");
 		strcat(text,"#");
 		strcat(text,textViewAll->message);
 g_print("%s\n","textViewAll->message != NULL");

@@ -1,8 +1,8 @@
 /********************************************/
 /*名称：main.c
 /*描述： 整个程序的入口main函数所在的文件。
-/*作者：王龙——team5
-/*日期：2010－06-27
+/*作者：蔡新军
+/*日期：2016－08-27
 /********************************************/
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,7 +18,12 @@
 #include "userinfo.h"
 #include "creat_main.h"
 #include "msg_list.h"
-
+#include "global.h"
+extern int my_img_code;
+extern int my_avatar_code;
+extern char  user_name[100];
+extern char  user_group[100];
+extern char  sigh[100];
 //套接子描述符
 int s;
 
@@ -29,7 +34,7 @@ struct sockaddr_in  addr_server;
 struct userinfo *head ;
 
 //两个线程描述符号
-pthread_t  ui_thread,chat_thread;//chat_thread专门接受数据包，然后进行处理	
+pthread_t  ui_thread,chat_thread;//chat_thread专门接受数据包，然后进行处理
 
 
 struct Msg *Msghead;
@@ -105,16 +110,22 @@ void button_clicked6(GtkWidget *button, gpointer data)
 /**************************************************/
 /*名称：main
 /*描述：整个程序的入口函数
-/*作成日期： 2010-06-27
+/*作成日期： 2016-08-27
 /*参数：
          参数1：argc、int、命令行参数的个数
          参数2：argv、char **、命令行参数组成的字符串数组指针
 /*返回值：返回值名称 、类型 、  含义
-/*	 0        、int 、  执行成功
-/*作者：王龙——team5
+/*	        、 int 、  执行成功
+/*作者：樊懿颉
 /***************************************************/
 int main(int argc,char ** argv)
-{
+{	//strcpy(user_name, "fan");
+	//printf("%d\n",sizeof(user_name));
+	//return 0;
+	//user_name = malloc(sizeof(char)*100);
+	strcpy(user_name, "fan");
+	strcpy(user_group, "my friend");
+	strcpy(sigh , "this is my sigh!");
 	int ret;
 	init_socket(&s,&addr_server);
 	head = NULL;
@@ -142,7 +153,7 @@ int main(int argc,char ** argv)
 	box = gtk_hbox_new (FALSE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (box), 2);
 	gtk_container_add (GTK_CONTAINER (window), box);
-	
+
 
 	button = gtk_button_new_with_label("我在线!");
 	gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 3);

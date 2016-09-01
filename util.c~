@@ -47,7 +47,10 @@ void die(char * message)
 /*返回值：void
 /*作者：王龙——team5
 /***************************************************/
-
+void int2str(int a, char * str) {
+	//memset(str, 0, 255);
+	sprintf(str, "%d", a);
+}
 void copyData(int from, int to)
 {
 	char buf[1024];
